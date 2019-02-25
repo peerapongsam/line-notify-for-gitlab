@@ -1,1 +1,4 @@
-{}
+{
+    "name": "line-notiy-for-gitlab",
+    "description": "API for send line notification from gitlab"
+}
