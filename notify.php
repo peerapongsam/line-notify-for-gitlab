@@ -129,7 +129,6 @@ function send_notify_curl($message, $token) {
 	if ($err) {
 	  return "cURL Error #:" . $err;
 	} else {
-    echo $message;
 	  return $response;
 	}
 }
