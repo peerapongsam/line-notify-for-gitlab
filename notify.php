@@ -1,5 +1,4 @@
 <?php
-
 $token = (isset($_GET['token'])) ? $_GET['token'] : getenv('DEFAULT_TOKEN');
 
 // Get POST body content
@@ -24,7 +23,7 @@ if ($events['object_kind'] == 'push') {
 }
 
 if ($message != "") {
-  echo send_notify($message, $token);
+  echo send_notify_curl($message, $token);
 }
 
 function pipeline($events, &$message) {
@@ -106,7 +105,7 @@ function convert_to_string_time($seconds) {
   return $message;
 }
 
-function send_notify($message, $token) {
+function send_notify_curl($message, $token) {
 	$curl = curl_init();
 
 	curl_setopt_array($curl, array(
@@ -117,7 +116,7 @@ function send_notify($message, $token) {
 	  CURLOPT_TIMEOUT => 30,
 	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 	  CURLOPT_CUSTOMREQUEST => "POST",
-	  CURLOPT_POSTFIELDS => "content=$message",
+	  CURLOPT_POSTFIELDS => http_build_query(array("message" => $message),'','&'),
 	  CURLOPT_HTTPHEADER => array(
 		  "Authorization: Bearer $token",
 		  "Content-Type: application/x-www-form-urlencoded"
@@ -130,6 +129,7 @@ function send_notify($message, $token) {
 	if ($err) {
 	  return "cURL Error #:" . $err;
 	} else {
+    echo $message;
 	  return $response;
 	}
 }
