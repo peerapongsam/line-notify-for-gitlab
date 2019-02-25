@@ -1,6 +1,6 @@
 <?php
 
-$token = (isset($_GET['token'])) ? $_GET['token'] : "";
+$token = (isset($_GET['token'])) ? $_GET['token'] : getenv('DEFAULT_TOKEN');
 
 // Get POST body content
 $content = file_get_contents('php://input');
@@ -106,7 +106,7 @@ function convert_to_string_time($seconds) {
   return $message;
 }
 
-function send_notify($token, $message) {
+function send_notify($message, $token) {
 	$curl = curl_init();
 
 	curl_setopt_array($curl, array(
@@ -119,8 +119,8 @@ function send_notify($token, $message) {
 	  CURLOPT_CUSTOMREQUEST => "POST",
 	  CURLOPT_POSTFIELDS => "message=$message",
 	  CURLOPT_HTTPHEADER => array(
-		"Authorization: Bearer $token",
-		"Content-Type: application/x-www-form-urlencoded"
+		  "Authorization: Bearer $token",
+		  "Content-Type: application/x-www-form-urlencoded"
 	  ),
 	));
 
