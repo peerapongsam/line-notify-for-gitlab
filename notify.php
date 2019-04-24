@@ -8,9 +8,9 @@ $events = json_decode($content, true);
 
 $message = "";
 
-if ($events['project']['name'] == 'theandroid') {
+if ($events['project']['name'] == 'theandroid' || $events['project']['name'] == 'Pantip-Android') {
   $message .= "🍰 ";
-} else if ($events['project']['name'] == 'theios2.0swift4') {
+} else if ($events['project']['name'] == 'theios2.0swift4' || $events['project']['name'] == 'Pantip-iOS') {
   $message .= "🍎 ";
 }
 
