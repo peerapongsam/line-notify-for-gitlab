@@ -76,7 +76,6 @@ function push($events, &$message) {
         $message .= "... and " . (count($commits) - 1) . " more commit(s)";
         if ($events['before'] == '0000000000000000000000000000000000000000') {
           //http://git.devpantip.com/developer/theandroid/commit/208328d5721f4211b88b39fa25bd16f2f5e41357
-          $message .= "\n- " . ucfirst(ltrim($commits[$last]['message'], '- '));
           $url = $events['repository']['homepage'] . "/commit/" . $events['after'];
         } else {
           //http://git.devpantip.com/developer/theandroid/compare/71c105ed2868ecd1e5c437a98b936402152fa36f...daa400979464bad816db27e5f58aaaefe7493f9b
