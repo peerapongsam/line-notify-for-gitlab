@@ -72,7 +72,7 @@ function push($events, &$message) {
     if (count($commits) > 0) {
       $last = (count($commits) - 1);
       if (count($commits) > 1) {
-        $message .= "\n- " . ucfirst(ltrim($commits[$last]['message'], '- '));
+        $message .= "\n- " . ucfirst(ltrim(strtok($commits[$last]['message'], "\n"), '- '));
         $message .= "... and " . (count($commits) - 1) . " more commit(s)";
         if ($events['before'] == '0000000000000000000000000000000000000000') {
           //http://git.devpantip.com/developer/theandroid/commit/208328d5721f4211b88b39fa25bd16f2f5e41357
